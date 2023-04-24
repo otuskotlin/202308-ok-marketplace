@@ -29,7 +29,7 @@ pluginManagement {
 //include("m1l5-coroutines")
 //include("m1l6-flows-and-channels")
 //include("m1l7-kmp")
-include("m3l1-spring")
+//include("m3l1-spring")
 
 include("ok-marketplace-acceptance")
 
@@ -43,3 +43,5 @@ include("ok-marketplace-mappers-v2")
 include("ok-marketplace-stubs")
 
 include("ok-marketplace-biz")
+
+include("ok-marketplace-app-spring")
