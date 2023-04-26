@@ -10,16 +10,23 @@ data class MkplAd(
     var description: String = "",
     var ownerId: MkplUserId = MkplUserId.NONE,
     var adType: MkplDealSide = MkplDealSide.NONE,
-    var visibility: MkplVisibility = MkplVisibility.NONE,
-    var productId: MkplProductId = MkplProductId.NONE,
     var adState: SMAdStates = SMAdStates.NONE,
     var views: Int = 0,
     var timePublished: Instant = Instant.NONE,
     var timeUpdated: Instant = Instant.NONE,
+    var visibility: MkplVisibility = MkplVisibility.NONE,
+    var productId: MkplProductId = MkplProductId.NONE,
+    var lock: MkplAdLock = MkplAdLock.NONE,
     val permissionsClient: MutableSet<MkplAdPermissionClient> = mutableSetOf()
 ) {
     fun deepCopy(): MkplAd = copy(
         permissionsClient = permissionsClient.toMutableSet(),
     )
-}
 
+    fun isEmpty() = this == NONE
+
+    companion object {
+        val NONE = MkplAd()
+    }
+
+}
