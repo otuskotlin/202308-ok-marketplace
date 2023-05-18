@@ -12,3 +12,4 @@
 3. [m1l3-oop](m1l3-oop) - Объектно-ориентированное программирование
 4. [m1l4-dsl](m1l4-dsl) - Предметно ориентированные языки (DSL)
 5. [m1l5-coroutines](m1l5-coroutines) - Корутины, ч.1
+6. [m1l6-flows-and-channels](m1l6-flows-and-channels) - Корутины, ч.2 - flow, channels 
