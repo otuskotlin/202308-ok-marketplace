@@ -24,7 +24,7 @@ Marketplace -- это площадка, на которой пользовате
    1. [Схема инфраструктуры](./docs/02-devops/01-infrastruture.md)
    2. [Схема мониторинга](./docs/02-devops/02-monitoring.md)
 
-[//]: # (3. Тесты)
+3. Приемочные тесты - [ok-marketplace-acceptance](ok-marketplace-acceptance)
 
 [//]: # (4. Архитектура)
 
