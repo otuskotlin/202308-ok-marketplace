@@ -43,6 +43,7 @@ Marketplace -- это площадка, на которой пользовате
 2. Бизнес-логика и внутренние модели
    1. [ok-marketplace-common](ok-marketplace-common) Внутренние модели, общие хелперы и интерфейсы
    2. [ok-marketplace-stubs](ok-marketplace-stubs) Стабы
+   3. [ok-marketplace-lib-cor](ok-marketplace-lib-cor) Библиотека для построения бизнес-логики
 
 3. Приложения (точки входа)
    1. [ok-marketplace-app-common](ok-marketplace-app-common) Общий код для приложений
