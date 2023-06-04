@@ -26,13 +26,10 @@ Marketplace -- это площадка, на которой пользовате
 
 3. Приемочные тесты - [ok-marketplace-acceptance](ok-marketplace-acceptance)
 
-[//]: # (4. Архитектура)
-
-[//]: # (    1. [Компонентная схема]&#40;./docs/04-architecture/01-arch.md&#41;)
-
-[//]: # (    2. [Интеграционная схема]&#40;./docs/04-architecture/02-integration.md&#41;)
-
-[//]: # (    3. [Описание API]&#40;./docs/04-architecture/03-api.md&#41;)
+4. Архитектура
+    1. [Компонентная схема](./docs/04-architecture/01-arch.md)
+    2. [Интеграционная схема](./docs/04-architecture/02-integration.md)
+    3. [Описание API](./docs/04-architecture/03-api.md)
 
 # Структура проекта
 
