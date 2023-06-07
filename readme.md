@@ -14,11 +14,11 @@ Marketplace -- это площадка, на которой пользовате
 ## Документация
 
 1. Маркетинг
-    1. [Заинтересанты](./docs/01-marketing/02-stakeholders.md)
-    2. [Целевая аудитория](./docs/01-marketing/01-target-audience.md)
-    3. [Конкурентный анализ](./docs/01-marketing/03-concurrency.md)
-    4. [Анализ экономики](./docs/01-marketing/04-economy.md)
-    5. [Пользовательские истории](./docs/01-marketing/05-user-stories.md)
+   1. [Заинтересанты](./docs/01-marketing/02-stakeholders.md)
+   2. [Целевая аудитория](./docs/01-marketing/01-target-audience.md)
+   3. [Конкурентный анализ](./docs/01-marketing/03-concurrency.md)
+   4. [Анализ экономики](./docs/01-marketing/04-economy.md)
+   5. [Пользовательские истории](./docs/01-marketing/05-user-stories.md)
 
 2. DevOps
    1. [Схема инфраструктуры](./docs/02-devops/01-infrastruture.md)
@@ -27,11 +27,16 @@ Marketplace -- это площадка, на которой пользовате
 3. Приемочные тесты - [ok-marketplace-acceptance](ok-marketplace-acceptance)
 
 4. Архитектура
-    1. [Компонентная схема](./docs/04-architecture/01-arch.md)
-    2. [Интеграционная схема](./docs/04-architecture/02-integration.md)
-    3. [Описание API](./docs/04-architecture/03-api.md)
+   1. [Компонентная схема](./docs/04-architecture/01-arch.md)
+   2. [Интеграционная схема](./docs/04-architecture/02-integration.md)
+   3. [Описание API](./docs/04-architecture/03-api.md)
 
 # Структура проекта
+
+1. Транспортные модели и мапперы
+   1. [specs](specs) - спецификации openapi
+   2. [ok-marketplace-api-v1-jackson](ok-marketplace-api-v1-jackson) Версия 1, используется jackson
+   3. [ok-marketplace-api-v2-kmp](ok-marketplace-api-v2-kmp) Версия 2, используется kotlinx serialization
 
 ## Подпроекты для занятий по языку Kotlin
 
@@ -40,5 +45,5 @@ Marketplace -- это площадка, на которой пользовате
 3. [m1l3-oop](m1l3-oop) - Объектно-ориентированное программирование
 4. [m1l4-dsl](m1l4-dsl) - Предметно ориентированные языки (DSL)
 5. [m1l5-coroutines](m1l5-coroutines) - Корутины, ч.1
-6. [m1l6-flows-and-channels](m1l6-flows-and-channels) - Корутины, ч.2 - flow, channels 
+6. [m1l6-flows-and-channels](m1l6-flows-and-channels) - Корутины, ч.2 - flow, channels
 7. [m1l7-kmp](m1l7-kmp) - Kotlin MultiPlatform
