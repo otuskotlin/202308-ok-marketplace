@@ -37,6 +37,10 @@ Marketplace -- это площадка, на которой пользовате
    1. [specs](specs) - спецификации openapi
    2. [ok-marketplace-api-v1-jackson](ok-marketplace-api-v1-jackson) Версия 1, используется jackson
    3. [ok-marketplace-api-v2-kmp](ok-marketplace-api-v2-kmp) Версия 2, используется kotlinx serialization
+   4. [ok-marketplace-mappers-v1](ok-marketplace-mappers-v1) Мапперы из транспортных моделей v1 во внутренние модели
+   5. [ok-marketplace-mappers-v2](ok-marketplace-mappers-v2) Мапперы из транспортных моделей v2 во внутренние модели
+
+2. [ok-marketplace-common](ok-marketplace-common) Внутренние модели, общие хелперы и интерфейсы
 
 ## Подпроекты для занятий по языку Kotlin
 
