@@ -47,6 +47,7 @@ Marketplace -- это площадка, на которой пользовате
 3. Приложения (точки входа)
    1. [ok-marketplace-app-common](ok-marketplace-app-common) Общий код для приложений
    2. [ok-marketplace-app-spring](ok-marketplace-app-spring) Spring
+   3. [ok-marketplace-app-ktor](ok-marketplace-app-ktor) Ktor
 
 ## Подпроекты для занятий по языку Kotlin
 
