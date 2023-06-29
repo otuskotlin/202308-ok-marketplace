@@ -49,6 +49,7 @@ Marketplace -- это площадка, на которой пользовате
    2. [ok-marketplace-app-spring](ok-marketplace-app-spring) Spring
    3. [ok-marketplace-app-ktor](ok-marketplace-app-ktor) Ktor
    4. [ok-marketplace-app-serverless](ok-marketplace-app-serverless) Яндекс-облако
+   5. [ok-marketplace-app-rabbit](ok-marketplace-app-rabbit) RabbitMq
 
 ## Подпроекты для занятий по языку Kotlin
 
