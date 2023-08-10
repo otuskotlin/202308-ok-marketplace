@@ -61,6 +61,11 @@ Marketplace -- это площадка, на которой пользовате
    5. [ok-marketplace-lib-logging-kermit](ok-marketplace-lib-logging-kermit) Логирование через kermit
    6. [ok-marketplace-lib-logging-logback](ok-marketplace-lib-logging-logback) Логирование через logback
 
+5. Репозитарии
+   1. [ok-marketplace-repo-in-memory](ok-marketplace-repo-in-memory) Репозитарий в памяти
+   2. [ok-marketplace-repo-stubs](ok-marketplace-repo-stubs) Репозитарий-заглушка
+   3. [ok-marketplace-repo-tests](ok-marketplace-repo-tests) Проект с тестами для репозитариев
+
 ## Подпроекты для занятий по языку Kotlin
 
 1. [m1l1-hello](m1l1-hello) - Вводное занятие, создание первой программы на Kotlin
