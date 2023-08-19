@@ -40,7 +40,12 @@ Marketplace -- это площадка, на которой пользовате
    4. [ok-marketplace-mappers-v1](ok-marketplace-mappers-v1) Мапперы из транспортных моделей v1 во внутренние модели
    5. [ok-marketplace-mappers-v2](ok-marketplace-mappers-v2) Мапперы из транспортных моделей v2 во внутренние модели
 
-2. [ok-marketplace-common](ok-marketplace-common) Внутренние модели, общие хелперы и интерфейсы
+2. Бизнес-логика и внутренние модели
+   1. [ok-marketplace-common](ok-marketplace-common) Внутренние модели, общие хелперы и интерфейсы
+   2. [ok-marketplace-stubs](ok-marketplace-stubs) Стабы
+
+3. Приложения (точки входа)
+   1. [ok-marketplace-app-common](ok-marketplace-app-common) Общий код для приложений
 
 ## Подпроекты для занятий по языку Kotlin
 
