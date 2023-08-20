@@ -1,49 +1,20 @@
 package ru.otus.otuskotlin.marketplace.app.v2
 
 import io.ktor.server.application.*
-import io.ktor.server.request.*
-import io.ktor.server.response.*
 import ru.otus.otuskotlin.marketplace.api.v2.models.*
-import ru.otus.otuskotlin.marketplace.biz.MkplAdProcessor
-import ru.otus.otuskotlin.marketplace.common.MkplContext
-import ru.otus.otuskotlin.marketplace.mappers.v2.*
+import ru.otus.otuskotlin.marketplace.app.common.MkplAppSettings
 
-suspend fun ApplicationCall.createAd(processor: MkplAdProcessor) {
-    val request = receive<AdCreateRequest>()
-    val context = MkplContext()
-    context.fromTransport(request)
-    processor.exec(context)
-    respond(context.toTransportCreate())
-}
+suspend fun ApplicationCall.createAd(appSettings: MkplAppSettings) : Unit =
+    processV2<AdCreateRequest, AdCreateResponse>(appSettings, ApplicationCall::createAd::class, "ad-create")
 
-suspend fun ApplicationCall.readAd(processor: MkplAdProcessor) {
-    val request = receive<AdReadRequest>()
-    val context = MkplContext()
-    context.fromTransport(request)
-    processor.exec(context)
-    respond(context.toTransportRead())
-}
+suspend fun ApplicationCall.readAd(appSettings: MkplAppSettings) : Unit =
+    processV2<AdReadRequest, AdReadResponse>(appSettings, ApplicationCall::readAd::class, "ad-read")
 
-suspend fun ApplicationCall.updateAd(processor: MkplAdProcessor) {
-    val request = receive<AdUpdateRequest>()
-    val context = MkplContext()
-    context.fromTransport(request)
-    processor.exec(context)
-    respond(context.toTransportUpdate())
-}
+suspend fun ApplicationCall.updateAd(appSettings: MkplAppSettings) : Unit =
+    processV2<AdUpdateRequest, AdUpdateResponse>(appSettings, ApplicationCall::updateAd::class, "ad-update")
 
-suspend fun ApplicationCall.deleteAd(processor: MkplAdProcessor) {
-    val request = receive<AdDeleteRequest>()
-    val context = MkplContext()
-    context.fromTransport(request)
-    processor.exec(context)
-    respond(context.toTransportDelete())
-}
+suspend fun ApplicationCall.deleteAd(appSettings: MkplAppSettings) : Unit =
+    processV2<AdDeleteRequest, AdDeleteResponse>(appSettings, ApplicationCall::deleteAd::class, "ad-delete")
 
-suspend fun ApplicationCall.searchAd(processor: MkplAdProcessor) {
-    val request = receive<AdSearchRequest>()
-    val context = MkplContext()
-    context.fromTransport(request)
-    processor.exec(context)
-    respond(context.toTransportSearch())
-}
+suspend fun ApplicationCall.searchAd(appSettings: MkplAppSettings) : Unit =
+    processV2<AdSearchRequest, AdSearchResponse>(appSettings, ApplicationCall::searchAd::class, "ad-search")

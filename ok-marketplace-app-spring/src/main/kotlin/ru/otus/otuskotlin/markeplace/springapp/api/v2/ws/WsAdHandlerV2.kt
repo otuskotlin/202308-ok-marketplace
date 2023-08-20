@@ -12,7 +12,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler
 import ru.otus.otuskotlin.marketplace.api.v2.apiV2Mapper
 import ru.otus.otuskotlin.marketplace.api.v2.apiV2ResponseSerialize
 import ru.otus.otuskotlin.marketplace.api.v2.models.IRequest
-import ru.otus.otuskotlin.marketplace.biz.MkplAdProcessor
+import ru.otus.otuskotlin.marketplace.app.common.MkplAppSettings
 import ru.otus.otuskotlin.marketplace.common.MkplContext
 import ru.otus.otuskotlin.marketplace.common.helpers.asMkplError
 import ru.otus.otuskotlin.marketplace.common.helpers.isUpdatableCommand
@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap
 
 @Component
 class
-WsAdHandlerV2(private val processor: MkplAdProcessor) : TextWebSocketHandler() {
+WsAdHandlerV2(private val appSettings: MkplAppSettings) : TextWebSocketHandler() {
     private val sessions = ConcurrentHashMap<String, WebSocketSession>()
 
     override fun afterConnectionEstablished(session: WebSocketSession) {
@@ -33,7 +33,7 @@ WsAdHandlerV2(private val processor: MkplAdProcessor) : TextWebSocketHandler() {
         val context = MkplContext()
         // TODO убрать, когда заработает обычный режим
         context.workMode = MkplWorkMode.STUB
-        runBlocking { processor.exec(context) }
+        runBlocking { appSettings.processor.exec(context) }
 
         val msg = apiV2ResponseSerialize(context.toTransportInit())
         session.sendMessage(TextMessage(msg))
@@ -45,7 +45,7 @@ WsAdHandlerV2(private val processor: MkplAdProcessor) : TextWebSocketHandler() {
         try {
             val request = apiV2Mapper.decodeFromString<IRequest>(message.payload)
             ctx.fromTransport(request)
-            runBlocking { processor.exec(ctx) }
+            runBlocking { appSettings.processor.exec(ctx) }
 
             val result = apiV2Mapper.encodeToString(ctx.toTransportAd())
 

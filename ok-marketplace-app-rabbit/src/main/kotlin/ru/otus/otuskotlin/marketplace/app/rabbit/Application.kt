@@ -2,6 +2,7 @@ package ru.otus.otuskotlin.marketplace.app.rabbit
 
 import ru.otus.otuskotlin.marketplace.app.rabbit.config.RabbitConfig
 import ru.otus.otuskotlin.marketplace.app.rabbit.config.RabbitExchangeConfiguration
+import ru.otus.otuskotlin.marketplace.app.rabbit.config.corSettings
 import ru.otus.otuskotlin.marketplace.app.rabbit.controller.RabbitController
 import ru.otus.otuskotlin.marketplace.app.rabbit.processor.RabbitDirectProcessorV1
 import ru.otus.otuskotlin.marketplace.app.rabbit.processor.RabbitDirectProcessorV2
@@ -38,7 +39,7 @@ fun main() {
         RabbitDirectProcessorV1(
             config = config,
             processorConfig = producerConfigV1,
-            processor = adProcessor
+            settings = corSettings
         )
     }
 
@@ -46,7 +47,7 @@ fun main() {
         RabbitDirectProcessorV2(
             config = config,
             processorConfig = producerConfigV2,
-            processor = adProcessor
+            settings = corSettings
         )
     }
     val controller by lazy {

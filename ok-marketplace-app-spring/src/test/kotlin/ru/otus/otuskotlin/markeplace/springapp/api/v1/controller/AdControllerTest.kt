@@ -2,7 +2,10 @@ package ru.otus.otuskotlin.markeplace.springapp.api.v1.controller
 
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.coVerify
+import io.mockk.every
+import io.mockk.mockk
 import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
@@ -10,8 +13,10 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.web.reactive.function.BodyInserters
 import ru.otus.otuskotlin.marketplace.api.v1.models.*
+import ru.otus.otuskotlin.marketplace.app.common.MkplAppSettings
 import ru.otus.otuskotlin.marketplace.biz.MkplAdProcessor
 import ru.otus.otuskotlin.marketplace.common.MkplContext
+import ru.otus.otuskotlin.marketplace.logging.common.MpLoggerProvider
 import ru.otus.otuskotlin.marketplace.mappers.v1.*
 
 @WebFluxTest(AdController::class, OfferController::class)
@@ -20,7 +25,15 @@ internal class AdControllerTest {
     private lateinit var webClient: WebTestClient
 
     @MockkBean(relaxUnitFun = true)
-    private lateinit var processor: MkplAdProcessor
+    private lateinit var appSettings: MkplAppSettings
+
+    private val processor = mockk<MkplAdProcessor>(relaxUnitFun = true)
+
+    @BeforeEach
+    fun beforeEach() {
+        every { appSettings.processor } returns processor
+        every { appSettings.logger } returns MpLoggerProvider()
+    }
 
     @Test
     fun createAd() = testStubAd(

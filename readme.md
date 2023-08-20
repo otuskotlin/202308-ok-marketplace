@@ -52,6 +52,14 @@ Marketplace -- это площадка, на которой пользовате
    5. [ok-marketplace-app-rabbit](ok-marketplace-app-rabbit) RabbitMq
    6. [ok-marketplace-app-kafka](ok-marketplace-app-kafka) Kafka
 
+4. Логирование
+   1. [specs-ad-log.yaml](specs%2Fspecs-ad-log.yaml) Модели логирования (openapi)
+   2. [ok-marketplace-api-log1](ok-marketplace-api-log1) Модели логирования
+   3. [ok-marketplace-mappers-log1](ok-marketplace-mappers-log1) Маперы для моделей логирования
+   4. [ok-marketplace-lib-logging-common](ok-marketplace-lib-logging-common) Интерфейс логирования
+   5. [ok-marketplace-lib-logging-kermit](ok-marketplace-lib-logging-kermit) Логирование через kermit
+   6. [ok-marketplace-lib-logging-logback](ok-marketplace-lib-logging-logback) Логирование через logback
+
 ## Подпроекты для занятий по языку Kotlin
 
 1. [m1l1-hello](m1l1-hello) - Вводное занятие, создание первой программы на Kotlin

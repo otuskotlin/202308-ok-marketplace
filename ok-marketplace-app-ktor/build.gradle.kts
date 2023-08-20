@@ -61,6 +61,9 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
+
+                implementation(project(":ok-marketplace-app-common"))
+
                 implementation(ktor("core")) // "io.ktor:ktor-server-core:$ktorVersion"
 
                 implementation(ktor("core")) // "io.ktor:ktor-server-core:$ktorVersion"

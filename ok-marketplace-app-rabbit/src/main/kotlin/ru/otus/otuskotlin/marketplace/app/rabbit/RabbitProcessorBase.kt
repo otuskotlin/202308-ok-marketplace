@@ -1,19 +1,13 @@
 package ru.otus.otuskotlin.marketplace.app.rabbit
 
-import com.rabbitmq.client.CancelCallback
-import com.rabbitmq.client.Channel
-import com.rabbitmq.client.ConnectionFactory
-import com.rabbitmq.client.DeliverCallback
-import com.rabbitmq.client.Delivery
+import com.rabbitmq.client.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.Clock
 import ru.otus.otuskotlin.marketplace.app.rabbit.config.RabbitConfig
 import ru.otus.otuskotlin.marketplace.app.rabbit.config.RabbitExchangeConfiguration
 import ru.otus.otuskotlin.marketplace.app.rabbit.config.rabbitLogger
-import ru.otus.otuskotlin.marketplace.common.MkplContext
 import kotlin.coroutines.CoroutineContext
 
 // // TODO-rmq-6: абстрактный класс с boilerplate-кодом для связи с RMQ
@@ -49,25 +43,17 @@ abstract class RabbitProcessorBase(
     /**
      * Обработка поступившего сообщения в deliverCallback
      */
-    protected abstract suspend fun Channel.processMessage(message: Delivery, context: MkplContext)
-
-    /**
-     * Обработка ошибок
-     */
-    protected abstract fun Channel.onError(e: Throwable, context: MkplContext)
+    protected abstract suspend fun Channel.processMessage(message: Delivery)
 
     /**
      * Callback, который вызывается при доставке сообщения консьюмеру
      */
     private fun Channel.getDeliveryCallback(): DeliverCallback = DeliverCallback { _, message ->
         runBlocking {
-            val context = MkplContext().apply {
-                timeStart = Clock.System.now()
-            }
             kotlin.runCatching {
-                processMessage(message, context)
+                processMessage(message)
             }.onFailure {
-                onError(it, context)
+                println("Failure $it")
             }
         }
     }
