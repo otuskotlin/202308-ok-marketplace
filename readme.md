@@ -67,6 +67,7 @@ Marketplace -- это площадка, на которой пользовате
    3. [ok-marketplace-repo-tests](ok-marketplace-repo-tests) Проект с тестами для репозитариев
    4. [ok-marketplace-repo-postgresql](ok-marketplace-repo-postgresql) Postgresql
    5. [ok-marketplace-repo-cassandra](ok-marketplace-repo-cassandra) Cassandra 
+   6. [ok-marketplace-repo-gremlin](ok-marketplace-repo-gremlin) ArcadeDb
 
 ## Подпроекты для занятий по языку Kotlin
 
