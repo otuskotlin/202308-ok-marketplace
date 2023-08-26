@@ -65,6 +65,7 @@ Marketplace -- это площадка, на которой пользовате
    1. [ok-marketplace-repo-in-memory](ok-marketplace-repo-in-memory) Репозитарий в памяти
    2. [ok-marketplace-repo-stubs](ok-marketplace-repo-stubs) Репозитарий-заглушка
    3. [ok-marketplace-repo-tests](ok-marketplace-repo-tests) Проект с тестами для репозитариев
+   4. [ok-marketplace-repo-postgresql](ok-marketplace-repo-postgresql) Postgresql
 
 ## Подпроекты для занятий по языку Kotlin
 

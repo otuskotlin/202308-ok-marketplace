@@ -14,6 +14,7 @@ import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.web.reactive.function.BodyInserters
 import ru.otus.otuskotlin.marketplace.api.v1.models.*
 import ru.otus.otuskotlin.marketplace.app.common.MkplAppSettings
+import ru.otus.otuskotlin.marketplace.backend.repo.sql.RepoAdSQL
 import ru.otus.otuskotlin.marketplace.biz.MkplAdProcessor
 import ru.otus.otuskotlin.marketplace.common.MkplContext
 import ru.otus.otuskotlin.marketplace.logging.common.MpLoggerProvider
@@ -34,6 +35,9 @@ internal class AdControllerTest {
         every { appSettings.processor } returns processor
         every { appSettings.logger } returns MpLoggerProvider()
     }
+
+    @MockkBean
+    private lateinit var repo: RepoAdSQL
 
     @Test
     fun createAd() = testStubAd(

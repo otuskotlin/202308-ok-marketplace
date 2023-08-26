@@ -34,6 +34,7 @@ dependencies {
     // repo
     implementation(project(":ok-marketplace-repo-in-memory"))
     implementation(project(":ok-marketplace-repo-stubs"))
+    implementation(project(":ok-marketplace-repo-postgresql"))
 
     // v1 api
     implementation(project(":ok-marketplace-api-v1-jackson"))
@@ -54,7 +55,6 @@ dependencies {
 
     implementation("com.sndyuk:logback-more-appenders:1.8.8")
     implementation("org.fluentd:fluent-logger:0.3.4")
-
 
     // tests
     testImplementation("org.springframework.boot:spring-boot-starter-test")
