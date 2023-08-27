@@ -9,6 +9,7 @@ import org.springframework.web.socket.CloseStatus
 import org.springframework.web.socket.TextMessage
 import org.springframework.web.socket.WebSocketSession
 import org.springframework.web.socket.handler.TextWebSocketHandler
+import ru.otus.otuskotlin.markeplace.springapp.fakeMkplPrincipal
 import ru.otus.otuskotlin.marketplace.api.v2.apiV2Mapper
 import ru.otus.otuskotlin.marketplace.api.v2.apiV2ResponseSerialize
 import ru.otus.otuskotlin.marketplace.api.v2.models.IRequest
@@ -33,6 +34,7 @@ WsAdHandlerV2(private val appSettings: MkplAppSettings) : TextWebSocketHandler()
         val context = MkplContext()
         // TODO убрать, когда заработает обычный режим
         context.workMode = MkplWorkMode.STUB
+        context.principal = fakeMkplPrincipal()
         runBlocking { appSettings.processor.exec(context) }
 
         val msg = apiV2ResponseSerialize(context.toTransportInit())
@@ -45,6 +47,7 @@ WsAdHandlerV2(private val appSettings: MkplAppSettings) : TextWebSocketHandler()
         try {
             val request = apiV2Mapper.decodeFromString<IRequest>(message.payload)
             ctx.fromTransport(request)
+            ctx.principal = fakeMkplPrincipal()
             runBlocking { appSettings.processor.exec(ctx) }
 
             val result = apiV2Mapper.encodeToString(ctx.toTransportAd())
