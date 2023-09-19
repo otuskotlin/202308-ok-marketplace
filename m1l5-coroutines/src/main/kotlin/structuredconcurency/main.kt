@@ -6,7 +6,7 @@ import kotlin.system.measureTimeMillis
 suspend fun main() {
     val vocabulary = Vocabulary()
 
-//        findWordsSlowly(vocabulary, "сильный", "любимый")
+//    findWordsSlowly(vocabulary, "сильный", "любимый")
     findWordsAsync(vocabulary, "привет", "любимый")
 
 }

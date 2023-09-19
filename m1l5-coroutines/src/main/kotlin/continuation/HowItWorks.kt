@@ -1,13 +1,10 @@
 package continuation
 
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import kotlin.coroutines.suspendCoroutine
 
-fun main() = runBlocking {
+fun main() = runBlocking(Dispatchers.Default) {
     println("Start")
-
 //    launch {
 //        delay(1000)
 //        repeat(5) {

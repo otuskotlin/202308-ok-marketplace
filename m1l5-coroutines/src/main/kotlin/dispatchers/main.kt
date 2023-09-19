@@ -14,9 +14,24 @@ fun main() = runBlocking {
     launch(Dispatchers.Default) { // will get dispatched to DefaultDispatcher -> shared background pool of threads
         println("Default               : I'm working in thread ${Thread.currentThread().name}")
     }.join()
-    launch(newSingleThreadContext("MyOwnThread")) { // will get its own new thread
-        println("newSingleThreadContext: I'm working in thread ${Thread.currentThread().name}")
+    launch(Dispatchers.IO) { // will get dispatched to DefaultDispatcher -> shared background pool of threads
+        println("Default               : I'm working in thread ${Thread.currentThread().name}")
     }.join()
+    newSingleThreadContext("MyOwnThread").use {
+        launch() { // will get its own new thread
+            println("newSingleThreadContext: I'm working in thread ${Thread.currentThread().name}")
+        }.join()
+    }
+    newFixedThreadPoolContext(8, "MyOwnThread").use {
+        launch() { // will get its own new thread
+            println("newSingleThreadContext: I'm working in thread ${Thread.currentThread().name}")
+        }.join()
+    }
+    withContext(Dispatchers.IO.limitedParallelism(8)) {
+        launch {
+
+        }
+    }
 }
 
 // When launch { ... } is used without parameters, it inherits the context (and thus dispatcher) from the CoroutineScope it is being launched from. In this case, it inherits the context of the main runBlocking coroutine which runs in the main thread.

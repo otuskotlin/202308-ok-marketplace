@@ -22,11 +22,12 @@ fun CoroutineScope.blockingCall(ctx: CoroutineContext) =
 @OptIn(DelicateCoroutinesApi::class)
 fun main() {
     println("Main start")
-    val ctx = newSingleThreadContext("MyOwnThread")
-    runBlocking {
-        repeat(5) {
-            suspendingCall(ctx)
+    newSingleThreadContext("MyOwnThread").use { ctx ->
+        runBlocking {
+            repeat(5) {
+                suspendingCall(ctx)
 //            blockingCall(ctx)
+            }
         }
     }
     println("Main end")
