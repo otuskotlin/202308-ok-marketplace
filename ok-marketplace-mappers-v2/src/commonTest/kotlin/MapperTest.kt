@@ -4,25 +4,23 @@ import ru.otus.otuskotlin.marketplace.api.v2.models.*
 import ru.otus.otuskotlin.marketplace.common.MkplContext
 import ru.otus.otuskotlin.marketplace.common.models.*
 import ru.otus.otuskotlin.marketplace.common.stubs.MkplStubs
-import kotlin.test.assertEquals
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
-class MapperUpdateTest {
+class MapperTest {
     @Test
     fun fromTransport() {
-        val req = AdUpdateRequest(
+        val req = AdCreateRequest(
             requestId = "1234",
             debug = AdDebug(
                 mode = AdRequestDebugMode.STUB,
                 stub = AdRequestDebugStubs.SUCCESS,
             ),
-            ad = AdUpdateObject(
-                id = "12345",
+            ad = AdCreateObject(
                 title = "title",
                 description = "desc",
                 adType = DealSide.DEMAND,
                 visibility = AdVisibility.PUBLIC,
-                lock = "456789",
             ),
         )
 
@@ -31,8 +29,6 @@ class MapperUpdateTest {
 
         assertEquals(MkplStubs.SUCCESS, context.stubCase)
         assertEquals(MkplWorkMode.STUB, context.workMode)
-        assertEquals("12345", context.adRequest.id.asString())
-        assertEquals("456789", context.adRequest.lock.asString())
         assertEquals("title", context.adRequest.title)
         assertEquals(MkplVisibility.VISIBLE_PUBLIC, context.adRequest.visibility)
         assertEquals(MkplDealSide.DEMAND, context.adRequest.adType)
@@ -42,14 +38,12 @@ class MapperUpdateTest {
     fun toTransport() {
         val context = MkplContext(
             requestId = MkplRequestId("1234"),
-            command = MkplCommand.UPDATE,
+            command = MkplCommand.CREATE,
             adResponse = MkplAd(
-                id = MkplAdId("12345"),
                 title = "title",
                 description = "desc",
                 adType = MkplDealSide.DEMAND,
                 visibility = MkplVisibility.VISIBLE_PUBLIC,
-                lock = MkplAdLock("456789"),
             ),
             errors = mutableListOf(
                 MkplError(
@@ -62,11 +56,9 @@ class MapperUpdateTest {
             state = MkplState.RUNNING,
         )
 
-        val req = context.toTransportAd() as AdUpdateResponse
+        val req = context.toTransportAd() as AdCreateResponse
 
         assertEquals("1234", req.requestId)
-        assertEquals("12345", req.ad?.id)
-        assertEquals("456789", req.ad?.lock)
         assertEquals("title", req.ad?.title)
         assertEquals("desc", req.ad?.description)
         assertEquals(AdVisibility.PUBLIC, req.ad?.visibility)

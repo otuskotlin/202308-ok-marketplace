@@ -21,7 +21,6 @@ fun validationIdCorrect(command: MkplCommand, processor: MkplAdProcessor) = runT
             description = "abc",
             adType = MkplDealSide.DEMAND,
             visibility = MkplVisibility.VISIBLE_PUBLIC,
-            lock = MkplAdLock("123-234-abc-ABC"),
         ),
     )
     processor.exec(ctx)
@@ -41,7 +40,6 @@ fun validationIdTrim(command: MkplCommand, processor: MkplAdProcessor) = runTest
             description = "abc",
             adType = MkplDealSide.DEMAND,
             visibility = MkplVisibility.VISIBLE_PUBLIC,
-            lock = MkplAdLock("123-234-abc-ABC"),
         ),
     )
     processor.exec(ctx)
@@ -61,7 +59,6 @@ fun validationIdEmpty(command: MkplCommand, processor: MkplAdProcessor) = runTes
             description = "abc",
             adType = MkplDealSide.DEMAND,
             visibility = MkplVisibility.VISIBLE_PUBLIC,
-            lock = MkplAdLock("123-234-abc-ABC"),
         ),
     )
     processor.exec(ctx)
@@ -84,7 +81,6 @@ fun validationIdFormat(command: MkplCommand, processor: MkplAdProcessor) = runTe
             description = "abc",
             adType = MkplDealSide.DEMAND,
             visibility = MkplVisibility.VISIBLE_PUBLIC,
-            lock = MkplAdLock("123-234-abc-ABC"),
         ),
     )
     processor.exec(ctx)

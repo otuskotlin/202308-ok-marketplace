@@ -2,10 +2,7 @@ package ru.otus.otuskotlin.marketplace.repo.inmemory
 
 import com.benasher44.uuid.uuid4
 import io.github.reactivecircus.cache4k.Cache
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import ru.otus.otuskotlin.marketplace.backend.repository.inmemory.model.AdEntity
-import ru.otus.otuskotlin.marketplace.common.helpers.errorRepoConcurrency
 import ru.otus.otuskotlin.marketplace.common.models.*
 import ru.otus.otuskotlin.marketplace.common.repo.*
 import kotlin.time.Duration
@@ -20,7 +17,6 @@ class AdRepoInMemory(
     private val cache = Cache.Builder<String, AdEntity>()
         .expireAfterWrite(ttl)
         .build()
-    private val mutex: Mutex = Mutex()
 
     init {
         initObjects.forEach {
@@ -58,43 +54,33 @@ class AdRepoInMemory(
             } ?: resultErrorNotFound
     }
 
-    private suspend fun doUpdate(key: String, oldLock: String, okBlock: (oldAd: AdEntity) -> DbAdResponse): DbAdResponse = mutex.withLock {
-        val oldAd = cache.get(key)
-        when {
-            oldAd == null -> resultErrorNotFound
-            oldAd.lock != oldLock -> DbAdResponse(
-                data = oldAd.toInternal(),
-                isSuccess = false,
-                errors = listOf(errorRepoConcurrency(MkplAdLock(oldLock), oldAd.lock?.let { MkplAdLock(it) }))
-            )
-
-            else -> okBlock(oldAd)
-        }
-    }
-
     override suspend fun updateAd(rq: DbAdRequest): DbAdResponse {
         val key = rq.ad.id.takeIf { it != MkplAdId.NONE }?.asString() ?: return resultErrorEmptyId
-        val oldLock = rq.ad.lock.takeIf { it != MkplAdLock.NONE }?.asString() ?: return resultErrorEmptyLock
         val newAd = rq.ad.copy()
         val entity = AdEntity(newAd)
-        return doUpdate(key, oldLock) {
-            cache.put(key, entity)
-            DbAdResponse(
-                data = newAd,
-                isSuccess = true,
-            )
+        return when (cache.get(key)) {
+            null -> resultErrorNotFound
+            else -> {
+                cache.put(key, entity)
+                DbAdResponse(
+                    data = newAd,
+                    isSuccess = true,
+                )
+            }
         }
     }
 
     override suspend fun deleteAd(rq: DbAdIdRequest): DbAdResponse {
         val key = rq.id.takeIf { it != MkplAdId.NONE }?.asString() ?: return resultErrorEmptyId
-        val oldLock = rq.lock.takeIf { it != MkplAdLock.NONE }?.asString() ?: return resultErrorEmptyLock
-        return doUpdate(key, oldLock) {oldAd ->
-            cache.invalidate(key)
-            DbAdResponse(
-                data = oldAd.toInternal(),
-                isSuccess = true,
-            )
+        return when (val oldAd = cache.get(key)) {
+            null -> resultErrorNotFound
+            else -> {
+                cache.invalidate(key)
+                DbAdResponse(
+                    data = oldAd.toInternal(),
+                    isSuccess = true,
+                )
+            }
         }
     }
 
@@ -133,18 +119,6 @@ class AdRepoInMemory(
                     group = "validation",
                     field = "id",
                     message = "Id must not be null or blank"
-                )
-            )
-        )
-        val resultErrorEmptyLock = DbAdResponse(
-            data = null,
-            isSuccess = false,
-            errors = listOf(
-                MkplError(
-                    code = "lock-empty",
-                    group = "validation",
-                    field = "lock",
-                    message = "Lock must not be null or blank"
                 )
             )
         )

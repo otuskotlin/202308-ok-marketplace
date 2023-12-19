@@ -1,7 +1,6 @@
 package ru.otus.otuskotlin.marketplace.backend.repo.tests
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runTest
 import ru.otus.otuskotlin.marketplace.common.models.*
 import ru.otus.otuskotlin.marketplace.common.repo.DbAdRequest
 import ru.otus.otuskotlin.marketplace.common.repo.IAdRepository
@@ -13,10 +12,7 @@ import kotlin.test.assertEquals
 abstract class RepoAdUpdateTest {
     abstract val repo: IAdRepository
     protected open val updateSucc = initObjects[0]
-    protected val updateConc = initObjects[1]
     private val updateIdNotFound = MkplAdId("ad-repo-update-not-found")
-    protected val lockBad = MkplAdLock("20000000-0000-0000-0000-000000000009")
-    protected val lockNew = MkplAdLock("20000000-0000-0000-0000-000000000002")
 
     private val reqUpdateSucc by lazy {
         MkplAd(
@@ -26,7 +22,6 @@ abstract class RepoAdUpdateTest {
             ownerId = MkplUserId("owner-123"),
             visibility = MkplVisibility.VISIBLE_TO_GROUP,
             adType = MkplDealSide.SUPPLY,
-            lock = initObjects.first().lock,
         )
     }
     private val reqUpdateNotFound = MkplAd(
@@ -36,16 +31,6 @@ abstract class RepoAdUpdateTest {
         ownerId = MkplUserId("owner-123"),
         visibility = MkplVisibility.VISIBLE_TO_GROUP,
         adType = MkplDealSide.SUPPLY,
-        lock = initObjects.first().lock,
-    )
-    private val reqUpdateConc = MkplAd(
-        id = updateConc.id,
-        title = "update object not found",
-        description = "update object not found description",
-        ownerId = MkplUserId("owner-123"),
-        visibility = MkplVisibility.VISIBLE_TO_GROUP,
-        adType = MkplDealSide.SUPPLY,
-        lock = lockBad,
     )
 
     @Test
@@ -66,15 +51,6 @@ abstract class RepoAdUpdateTest {
         assertEquals(null, result.data)
         val error = result.errors.find { it.code == "not-found" }
         assertEquals("id", error?.field)
-    }
-
-    @Test
-    fun updateConcurrencyError() = runTest {
-        val result = repo.updateAd(DbAdRequest(reqUpdateConc))
-        assertEquals(false, result.isSuccess)
-        val error = result.errors.find { it.code == "concurrency" }
-        assertEquals("lock", error?.field)
-        assertEquals(updateConc, result.data)
     }
 
     companion object : BaseInitAds("update") {
