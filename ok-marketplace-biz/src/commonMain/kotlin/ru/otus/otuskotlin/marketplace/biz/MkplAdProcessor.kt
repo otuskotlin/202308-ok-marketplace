@@ -17,8 +17,8 @@ import ru.otus.otuskotlin.marketplace.cor.chain
 import ru.otus.otuskotlin.marketplace.cor.rootChain
 import ru.otus.otuskotlin.marketplace.cor.worker
 
-class MkplAdProcessor(val settings: MkplCorSettings = MkplCorSettings()) {
-    suspend fun exec(ctx: MkplContext) = BusinessChain.exec(ctx.apply { this.settings = this@MkplAdProcessor.settings })
+class MkplAdProcessor(private val corSettings: MkplCorSettings = MkplCorSettings.NONE) {
+    suspend fun exec(ctx: MkplContext) = BusinessChain.exec(ctx.apply { settings = corSettings })
 
     companion object {
         private val BusinessChain = rootChain<MkplContext> {

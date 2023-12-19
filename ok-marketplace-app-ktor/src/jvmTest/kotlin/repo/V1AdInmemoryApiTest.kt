@@ -7,6 +7,7 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.jackson.*
+import io.ktor.server.config.*
 import io.ktor.server.testing.*
 import org.junit.Test
 import ru.otus.otuskotlin.marketplace.api.v1.models.*
@@ -48,6 +49,9 @@ class V1AdInmemoryApiTest {
         application {
             moduleJvm(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
         }
+        environment {
+            config = MapApplicationConfig()
+        }
         val client = myClient()
 
         val createAd = AdCreateObject(
@@ -83,6 +87,9 @@ class V1AdInmemoryApiTest {
         application {
             moduleJvm(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
         }
+        environment {
+            config = MapApplicationConfig()
+        }
         val client = myClient()
 
         val response = client.post("/v1/ad/read") {
@@ -106,6 +113,9 @@ class V1AdInmemoryApiTest {
         val repo = AdRepoInMemory(initObjects = listOf(initAd), randomUuid = { uuidNew })
         application {
             moduleJvm(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
+        }
+        environment {
+            config = MapApplicationConfig()
         }
         val client = myClient()
 
@@ -144,6 +154,9 @@ class V1AdInmemoryApiTest {
         application {
             moduleJvm(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
         }
+        environment {
+            config = MapApplicationConfig()
+        }
         val client = myClient()
 
         val response = client.post("/v1/ad/delete") {
@@ -171,6 +184,9 @@ class V1AdInmemoryApiTest {
         application {
             moduleJvm(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
         }
+        environment {
+            config = MapApplicationConfig()
+        }
         val client = myClient()
 
         val response = client.post("/v1/ad/search") {
@@ -195,6 +211,9 @@ class V1AdInmemoryApiTest {
         val repo = AdRepoInMemory(initObjects = listOf(initAd, initAdSupply), randomUuid = { uuidNew })
         application {
             moduleJvm(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
+        }
+        environment {
+            config = MapApplicationConfig()
         }
         val client = myClient()
 

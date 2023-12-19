@@ -7,6 +7,7 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.jackson.*
+import io.ktor.server.config.*
 import io.ktor.server.testing.*
 import org.junit.Test
 import ru.otus.otuskotlin.marketplace.api.v1.models.*
@@ -40,6 +41,9 @@ class V1AdMockApiTest {
         )
         application {
             moduleJvm(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
+        }
+        environment {
+            config = MapApplicationConfig()
         }
         val client = myClient()
 
@@ -86,6 +90,9 @@ class V1AdMockApiTest {
         application {
             moduleJvm(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
         }
+        environment {
+            config = MapApplicationConfig()
+        }
         val client = myClient()
 
         val response = client.post("/v1/ad/read") {
@@ -126,6 +133,9 @@ class V1AdMockApiTest {
         )
         application {
             moduleJvm(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
+        }
+        environment {
+            config = MapApplicationConfig()
         }
         val client = myClient()
 
@@ -190,6 +200,9 @@ class V1AdMockApiTest {
             )
             moduleJvm(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
         }
+        environment {
+            config = MapApplicationConfig()
+        }
 
         val client = myClient()
 
@@ -233,6 +246,9 @@ class V1AdMockApiTest {
                     }
                 )
             moduleJvm(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
+        }
+        environment {
+            config = MapApplicationConfig()
         }
         val client = myClient()
 
@@ -281,6 +297,9 @@ class V1AdMockApiTest {
                     }
                 )
             moduleJvm(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
+        }
+        environment {
+            config = MapApplicationConfig()
         }
         val client = myClient()
 

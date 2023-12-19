@@ -5,6 +5,8 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.config.*
+import io.ktor.server.config.yaml.*
 import io.ktor.server.testing.*
 import ru.otus.otuskotlin.marketplace.api.v2.apiV2Mapper
 import ru.otus.otuskotlin.marketplace.api.v2.models.*
@@ -47,6 +49,9 @@ class V2AdInmemoryApiTest {
         application {
             module(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
         }
+        environment {
+            config = MapApplicationConfig()
+        }
 
         val createAd = AdCreateObject(
             title = "Болт",
@@ -82,6 +87,9 @@ class V2AdInmemoryApiTest {
         application {
             module(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
         }
+        environment {
+            config = MapApplicationConfig()
+        }
         val client = myClient()
 
         val response = client.post("/v2/ad/read") {
@@ -105,6 +113,9 @@ class V2AdInmemoryApiTest {
         val repo = AdRepoInMemory(initObjects = listOf(initAd), randomUuid = { uuidNew })
         application {
             module(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
+        }
+        environment {
+            config = MapApplicationConfig()
         }
 
         val adUpdate = AdUpdateObject(
@@ -143,6 +154,9 @@ class V2AdInmemoryApiTest {
         application {
             module(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
         }
+        environment {
+            config = MapApplicationConfig()
+        }
         val client = myClient()
 
         val response = client.post("/v2/ad/delete") {
@@ -170,6 +184,9 @@ class V2AdInmemoryApiTest {
         application {
             module(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
         }
+        environment {
+            config = MapApplicationConfig()
+        }
         val client = myClient()
 
         val response = client.post("/v2/ad/search") {
@@ -194,6 +211,9 @@ class V2AdInmemoryApiTest {
         val repo = AdRepoInMemory(initObjects = listOf(initAd, initAdSupply), randomUuid = { uuidNew })
         application {
             module(MkplAppSettings(corSettings = MkplCorSettings(repoTest = repo)))
+        }
+        environment {
+            config = MapApplicationConfig()
         }
         val client = myClient()
 
